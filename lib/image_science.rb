@@ -153,6 +153,7 @@ class ImageScience
     # We cannot use rb_ensure in these cases because FreeImage may internally
     # make allocations via which our code will never see.
     builder.prefix <<-"END"
+      void FreeImageErrorHandler(FREE_IMAGE_FORMAT fif, const char *message) __attribute__ ((__noreturn__));
       void FreeImageErrorHandler(FREE_IMAGE_FORMAT fif, const char *message) {
         VALUE err = rb_sprintf(
                  "FreeImage exception for type %s: %s",
